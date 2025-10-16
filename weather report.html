@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather Report</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #0a0f1d, #111827, #1e293b);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+    }
+
+    .container {
+      background: linear-gradient(145deg, rgba(0, 255, 255, 0.2), rgba(0, 120, 255, 0.2));
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(0, 255, 255, 0.4);
+      border-radius: 25px;
+      padding: 60px 40px;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.05);
+      width: 420px;
+      height: 500px;
+      transition: 0.4s ease;
+    }
+
+    .container:hover {
+      box-shadow: 0 0 60px rgba(0, 255, 255, 0.7), inset 0 0 25px rgba(255, 255, 255, 0.1);
+      transform: translateY(-8px);
+    }
+
+    h1 {
+      font-size: 2.2em;
+      color: #00eaff;
+      text-shadow: 0 0 10px #00eaff, 0 0 20px #0077ff;
+      margin-bottom: 30px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      text-align: center;
+      font-size: 1.1em;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    input::placeholder {
+      color: #bbb;
+    }
+
+    input:focus {
+      box-shadow: 0 0 15px #00eaff;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(90deg, #00eaff, #0077ff);
+      color: white;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 20px rgba(0, 234, 255, 0.4);
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #0077ff, #00eaff);
+      box-shadow: 0 0 35px rgba(0, 234, 255, 0.8);
+    }
+
+    .weather-info {
+      margin-top: 30px;
+      animation: fadeIn 1s ease;
+    }
+
+    .temperature {
+      font-size: 3.5em;
+      font-weight: bold;
+      color: #00eaff;
+      text-shadow: 0 0 25px #00eaff, 0 0 40px #0077ff;
+      margin: 15px 0;
+    }
+
+    .condition {
+      font-size: 1.4em;
+      text-transform: capitalize;
+      color: #ccc;
+    }
+
+    .error {
+      color: #ff7777;
+      margin-top: 20px;
+      font-weight: bold;
+      text-shadow: 0 0 12px #ff4444;
+    }
+
+    img {
+      width: 100px;
+      height: 100px;
+      filter: drop-shadow(0 0 15px #00eaff);
+    }
+
+    h2 {
+      font-size: 1.5em;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌤 Weather Report</h1>
+    <input type="text" id="locationInput" placeholder="Enter city name" />
+    <button onclick="getWeather()">Get Weather</button>
+    <div id="weatherResult" class="weather-info"></div>
+    <div id="errorMsg" class="error"></div>
+  </div>
+
+  <script>
+    async function getWeather() {
+      const location = document.getElementById("locationInput").value.trim();
+      const weatherDiv = document.getElementById("weatherResult");
+      const errorDiv = document.getElementById("errorMsg");
+
+      weatherDiv.innerHTML = "";
+      errorDiv.innerHTML = "";
+
+      if (location === "") {
+        errorDiv.innerHTML = "⚠️ Please enter a location.";
+        return;
+      }
+
+      const apiKey = "5e66b46a02394a299ef60753252408";
+      const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=yes`;
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("City not found");
+        }
+        const data = await response.json();
+
+        const city = data.location.name;
+        const country = data.location.country;
+        const temp = data.current.temp_c;
+        const condition = data.current.condition.text;
+        const icon = data.current.condition.icon;
+
+        weatherDiv.innerHTML = `
+          <h2>${city}, ${country}</h2>
+          <img src="https:${icon}" alt="Weather icon" />
+          <div class="temperature">${temp}°C</div>
+          <div class="condition">${condition}</div>
+        `;
+      } catch (error) {
+        errorDiv.innerHTML = "❌ " + error.message;
+      }
+    }
+  </script>
+</body>
+</html>
