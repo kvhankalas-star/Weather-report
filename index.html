@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Weather Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div id="season-bg"></div>
+    <div id="daynight-overlay"></div>
+
+    <!-- Main Weather Dashboard -->
+    <div class="app">
+        <h1>🌤 Live Weather Dashboard</h1>
+        <p class="sub">Search any city worldwide</p>
+
+        <form id="form">
+            <input type="text" id="query" placeholder="Search city..." required>
+            <button id="go">Search</button>
+        </form>
+
+        <div id="error"></div>
+        <div id="empty">Enter a city to get weather.</div>
+
+        <div id="result" style="display:none">
+
+            <h2 id="place"></h2>
+            <p id="localtime"></p>
+
+            <div class="main-info">
+                <img id="icon" width="90" height="90">
+                <div>
+                    <h1 id="temp"></h1>
+                    <h3 id="condition"></h3>
+                    <p id="feels"></p>
+                </div>
+            </div>
+
+            <div class="grid">
+                <div class="box">Humidity: <span id="humidity"></span></div>
+                <div class="box">Wind: <span id="wind"></span></div>
+                <div class="box">PM2.5: <span id="pm25"></span></div>
+                <div class="box">Last Updated: <span id="updated"></span></div>
+            </div>
+
+        </div>
+
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>

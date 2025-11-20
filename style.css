@@ -1,0 +1,187 @@
+:root {
+  --text: #ffffff;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  font-family: system-ui;
+  overflow: hidden;
+}
+
+/* Dashboard */
+.app {
+  width: min(750px, 95%);
+  margin: auto;
+  margin-top: 40px;
+  padding: 25px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 10;
+}
+
+/* Animated seasonal backgrounds */
+#season-bg {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: 1s;
+  z-index: 0;
+}
+
+/* Add your images */
+.sunny-bg    { background-image: url("images/sunny.jpg"); }
+.rain-bg     { background-image: url("images/rain.jpg"); }
+.snow-bg     { background-image: url("images/snow.jpg"); }
+.storm-bg    { background-image: url("images/storm.jpg"); }
+.fog-bg      { background-image: url("images/fog.jpg"); }
+.cloudy-bg   { background-image: url("images/cloudy.jpg"); }
+.spring-bg   { background-image: url("images/spring.jpg"); }
+
+/* Day/Night overlay */
+#daynight-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  transition: 1s;
+}
+
+#daynight-overlay.day {
+  background: rgba(255,255,255,0.05);
+}
+
+#daynight-overlay.night {
+  background: rgba(0,0,40,0.45);
+}
+
+/* Styles */
+form { display: flex; gap: 10px; margin: 15px 0; }
+input {
+  flex: 1;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: #0b1220cc;
+  color: white;
+}
+button {
+  padding: 14px 20px;
+  border: none;
+  background: #22d3ee;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Info cards */
+.grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 10px;
+}
+.box {
+  padding: 12px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+}
+
+/* Base background container */
+#season-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
+}
+
+/* Day/Night overlay */
+#daynight-overlay.day {
+    background: rgba(255, 255, 255, 0.2);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transition: 0.4s;
+}
+
+#daynight-overlay.night {
+    background: rgba(0, 0, 40, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transition: 0.4s;
+}
+
+/* --------------------------------------------
+   ☀ DAY + 🌙 NIGHT BACKGROUNDS
+   Make sure images/ folder contains all images
+--------------------------------------------- */
+
+/* SUNNY */
+#season-bg.sunny-day {
+    background-image: url("images/sunny-day.jpg");
+}
+#season-bg.sunny-night {
+    background-image: url("images/sunny-night.jpg");
+}
+
+/* CLOUDY */
+#season-bg.cloudy-day {
+    background-image: url("images/cloudy-day.jpg");
+}
+#season-bg.cloudy-night {
+    background-image: url("images/cloudy-night.jpg");
+}
+
+/* RAIN */
+#season-bg.rain-day {
+    background-image: url("images/rain-day.jpg");
+}
+#season-bg.rain-night {
+    background-image: url("images/rain-night.jpg");
+}
+
+/* FOG */
+#season-bg.fog-day {
+    background-image: url("images/fog-day.jpg");
+}
+#season-bg.fog-night {
+    background-image: url("images/fog-night.jpg");
+}
+
+/* STORM */
+#season-bg.storm-day {
+    background-image: url("images/storm-day.jpg");
+}
+#season-bg.storm-night {
+    background-image: url("images/storm-night.jpg");
+}
+
+/* SNOW */
+#season-bg.snow-day {
+    background-image: url("images/snow-day.jpg");
+}
+#season-bg.snow-night {
+    background-image: url("images/snow-night.jpg");
+}
+
+/* DEFAULT (SPRING) */
+#season-bg.spring-day {
+    background-image: url("images/spring-day.jpg");
+}
+#season-bg.spring-night {
+    background-image: url("images/spring-night.jpg");
+}
