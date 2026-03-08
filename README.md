@@ -1,127 +1,175 @@
-🌦️ Weather-Report
+🌤️ AeroSky – Professional Weather Dashboard
 
-A modern, animated, real-time Weather Dashboard built using HTML, CSS, and JavaScript with WeatherAPI.com for live weather data.
+AeroSky is a modern interactive weather dashboard that provides real-time weather data, hourly forecasts, and 7-day outlooks for cities worldwide.
+It features a beautiful glassmorphism UI, animated weather effects, and an interactive map for selecting locations.
 
-This project gives beautiful dynamic visuals for day & night, rain, cloudy, fog, storm, snow, and more — with automatic background animation for each weather condition.
+This project demonstrates API integration, responsive UI design, and dynamic data visualization using JavaScript.
+
 
 🚀 Features
-✅ Live Weather Search
 
-Search any city worldwide
+✅ Real-Time Weather Data
+Displays live temperature, humidity, wind speed, pressure, and visibility.
 
-Real-time temperature, humidity, wind, AQI (PM2.5)
+✅ City Search with Suggestions
+Search any city globally with autocomplete suggestions.
 
-Accurate sunrise/sunset based day-night mode
+✅ Interactive Map
+Click anywhere on the map to view weather for that location.
 
-✅ Dynamic Background System
+✅ Hourly Forecast
+Shows the next 12 hours of weather predictions.
 
-Background changes automatically for:
+✅ 7-Day Forecast
+Displays minimum and maximum temperatures for the week.
 
-☀️ Sunny / Clear
+✅ Dynamic Background & Animations
 
-☁️ Cloudy
+Sun animation for clear weather ☀️
 
-🌧 Rain / Drizzle
+Rain animation 🌧️
 
-🌫 Fog / Mist / Haze
+Snow animation ❄️
 
-🌩 Thunderstorm
+Thunderstorm lightning effects ⚡
 
-❄ Snow / Ice / Sleet
+Moving clouds ☁️
 
-🌙 Night Mode versions of all above
+✅ Geolocation Support
+Automatically detects the user’s current location.
 
-✅ Smooth UI Experience
-
-Loading state
-
-Error handling
-
-Clean layout
-
-Works on mobile & desktop
-
-<img width="1902" height="913" alt="Screenshot 2025-11-21 001328" src="https://github.com/user-attachments/assets/8c0cf68e-4a1d-4308-a680-38d1a6845e4e" />
+✅ Responsive Design
+Works smoothly on desktop, tablet, and mobile devices.
 
 
-Example:
 
-🛠️ Tech Stack
-
-HTML5
-
-CSS3 (Animations included)
-
-JavaScript (Fetch API)
-
-WeatherAPI.com
-
-🔑 Setup Instructions
-1️⃣ Get your API key
-
-Create a free account at
-https://www.weatherapi.com
-
-Copy your API key:
-
-2️⃣ Add API key in script.js
-const API_KEY = "YOUR_API_KEY_HERE";
-
-3️⃣ | Condition | Day Image      | Night Image      |
-| --------- | -------------- | ---------------- |
-| Sunny     | sunny-day.jpg  | sunny-night.jpg  |
-| Cloudy    | cloudy-day.jpg | cloudy-night.jpg |
-| Rain      | rain-day.jpg   | rain-night.jpg   |
-| Snow      | snow-day.jpg   | snow-night.jpg   |
-| Fog/Mist  | fog-day.jpg    | fog-night.jpg    |
-| Storm     | storm-day.jpg  | storm-night.jpg  |
-| Default   | spring-day.jpg | spring-night.jpg |
+🛠️ Technologies Used
+Technology	         Purpose
+HTML5	                 Structure of the web application
+CSS3	                 Styling and animations
+Tailwind CSS         	 Modern responsive UI
+JavaScript (ES6)	     Application logic
+Open-Meteo API	       Weather data
+Open-Meteo Geocoding API	City search
+Leaflet.js             Interactive maps
+OpenStreetMap	         Map tiles
 
 
-Place all in:
+📸 Dashboard Preview
 
-/images/
+Add your project screenshot here.
 
-📁 Project Structure
-Weather-report/
-│── index.html
-│── style.css
-│── script.js
-│── images/
-│     ├── sunny-day.jpg
-│     ├── sunny-night.jpg
-│     ├── cloudy-day.jpg
-│     ├── cloudy-night.jpg
-│     ├── ...
-└── README.md
+Example: <img width="1882" height="892" alt="image" src="https://github.com/user-attachments/assets/d178ca56-a1a6-4cb6-aaad-450e54cc39ad" />
 
-🔥 Live Demo
 
-(If you publish using GitHub Pages)
 
-Add link here later.
+📂 Project Structure
+AeroSky-Weather-Dashboard
+│
+├── index.html      # Main HTML structure
+├── style.css       # Custom styling & animations
+├── script.js       # Weather API logic and UI updates
+└── README.md       # Project documentation
 
-👨‍💻 Author
 
-Kiran Vhankalas
 
-🔗 GitHub:
-https://github.com/kvhankalas-star/Weather-report.git
+⚙️ How It Works
 
-🔗 LinkedIn:
+The application detects the user’s current location using Geolocation API.
 
-⭐ Contribute
+It fetches weather data from the Open-Meteo Weather API.
 
-Pull requests are welcome! If you want new features like:
+The dashboard dynamically updates:
+
+Current temperature
+
+Weather conditions
+
+Hourly forecast
 
 Weekly forecast
 
-Animations
+Users can:
 
-Multi-language support
+Search for any city
 
-Just open an issue.
+Click on the map to view weather data.
 
-📝 License
 
-This project is free to use — add a license if you want.
+
+📡 APIs Used
+Open-Meteo Weather API
+
+Provides real-time weather forecasts.
+
+https://api.open-meteo.com/
+Open-Meteo Geocoding API
+
+Used for searching cities.
+
+https://geocoding-api.open-meteo.com/
+OpenStreetMap + Leaflet
+
+Used for displaying interactive maps.
+
+https://leafletjs.com/
+
+
+
+💻 Installation & Setup
+
+Clone the repository:
+
+git clone https://github.com/yourusername/aerosky-weather-dashboard.git
+
+Open the project folder:
+
+cd aerosky-weather-dashboard
+
+Run the project:
+
+Simply open index.html in your browser.
+
+No backend or installation required.
+
+
+
+
+🌍 Future Improvements
+
+Add air quality index (AQI)
+
+Add weather radar visualization
+
+Add temperature graphs
+
+Save favorite cities
+
+Dark / light theme toggle
+
+
+
+📌 Learning Outcomes
+
+Through this project I practiced:
+
+API integration
+
+JavaScript asynchronous programming
+
+DOM manipulation
+
+Responsive UI design
+
+Interactive maps with Leaflet
+
+Weather data visualization
+
+
+👨‍💻 Author
+
+Kiran
+
+Aspiring Data Analyst & Developer
+
+⭐ If you like this project, consider starring the repository.
