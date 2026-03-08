@@ -3,53 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animated Weather Dashboard</title>
+    <title>AeroSky - Professional Weather Dashboard</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Leaflet for Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="weather-bg min-h-screen text-white overflow-x-hidden bg-gradient-to-br from-blue-600 to-indigo-800">
+    
+    <!-- Background Animations Container -->
+    <div id="animations-layer" class="fixed inset-0 pointer-events-none z-0"></div>
+    <div id="thunder-layer" class="fixed inset-0 pointer-events-none z-10"></div>
 
-    <!-- Animated Background -->
-    <div id="season-bg"></div>
-    <div id="daynight-overlay"></div>
-
-    <!-- Main Weather Dashboard -->
-    <div class="app">
-        <h1>🌤 Live Weather Dashboard</h1>
-        <p class="sub">Search any city worldwide</p>
-
-        <form id="form">
-            <input type="text" id="query" placeholder="Search city..." required>
-            <button id="go">Search</button>
-        </form>
-
-        <div id="error"></div>
-        <div id="empty">Enter a city to get weather.</div>
-
-        <div id="result" style="display:none">
-
-            <h2 id="place"></h2>
-            <p id="localtime"></p>
-
-            <div class="main-info">
-                <img id="icon" width="90" height="90">
-                <div>
-                    <h1 id="temp"></h1>
-                    <h3 id="condition"></h3>
-                    <p id="feels"></p>
+    <div class="container mx-auto px-4 py-8 relative z-20 max-w-6xl">
+        <header class="flex flex-col md:flex-row justify-between items-center gap-6 mb-10">
+            <div class="flex items-center gap-3">
+                <div class="bg-white/10 p-2.5 rounded-2xl backdrop-blur-lg border border-white/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-yellow-400"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
                 </div>
+                <h1 class="text-3xl font-black tracking-tight drop-shadow-xl uppercase">AeroSky</h1>
             </div>
 
-            <div class="grid">
-                <div class="box">Humidity: <span id="humidity"></span></div>
-                <div class="box">Wind: <span id="wind"></span></div>
-                <div class="box">PM2.5: <span id="pm25"></span></div>
-                <div class="box">Last Updated: <span id="updated"></span></div>
+            <div class="relative w-full md:w-[450px] z-50">
+                <input 
+                    type="text" 
+                    id="search-input"
+                    placeholder="Search city (e.g. london, PARIS, Tokyo)..." 
+                    class="w-full bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl py-3.5 pl-6 pr-4 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all shadow-xl"
+                />
+                <div id="suggestions" class="absolute top-full mt-2 w-full glass-panel rounded-2xl overflow-hidden shadow-2xl hidden"></div>
             </div>
+        </header>
 
+        <div id="loading-state" class="flex flex-col items-center justify-center h-[50vh]">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-white mb-4"></div>
+            <p class="text-lg font-medium text-white/60 tracking-widest uppercase">Syncing Atmosphere...</p>
         </div>
 
+
+        
+
+        <div id="dashboard" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Summary Panel -->
+             
+            <div class="lg:col-span-4 space-y-8">
+                <div class="glass-panel p-10 rounded-[2.5rem] relative overflow-hidden group">
+                    <div class="flex justify-between items-start mb-10">
+                        <div>
+                            <h2 id="city-name" class="text-5xl font-black mb-2 break-words">--</h2>
+                            <p id="condition-text" class="text-white/60 font-medium capitalize tracking-wider">--</p>
+                        </div>
+                        <div id="main-icon" class="p-4 glass-panel rounded-3xl text-yellow-400"></div>
+                    </div>
+                    
+                    
+
+                    <div class="mb-10">
+                        <div id="main-temp" class="text-9xl font-thin tracking-tighter">--°</div>
+                        <div id="feels-like" class="text-xl text-white/60 mt-2 italic">RealFeel® --°</div>
+                    </div>
+
+                    
+
+
+                    <div class="flex items-center gap-6 text-lg border-t border-white/10 pt-8">
+                        <div class="flex items-center gap-2 font-bold"><span class="text-orange-400">H:</span> <span id="temp-max">--</span>°</div>
+                        <div class="flex items-center gap-2 text-white/50"><span class="text-blue-300">L:</span> <span id="temp-min">--</span>°</div>
+                    </div>
+
+                </div>
+
+                 <div class="glass-panel p-2 rounded-[2.5rem] shadow-2xl">
+                   <div id="map"></div>
+                </div>
+                
+            </div>
+
+            <!-- Detailed Stats -->
+            <div class="lg:col-span-8 space-y-8">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-5" id="stats-grid">
+                    <!-- Stats will be injected here -->
+                </div>
+
+                <div class="glass-panel p-8 rounded-[2rem]">
+                    <h3 class="text-xl font-bold mb-8 uppercase tracking-widest text-white/50">Hourly Forecast</h3>
+                    <div id="hourly-forecast" class="flex gap-6 overflow-x-auto custom-scrollbar pb-6"></div>
+                </div>
+
+                <div class="glass-panel p-8 rounded-[2rem]">
+                    <h3 class="text-xl font-bold mb-8 uppercase tracking-widest text-white/50">7-Day Outlook</h3>
+                    <div id="daily-forecast" class="space-y-3"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
