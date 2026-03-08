@@ -120,7 +120,7 @@ https://leafletjs.com/
 
 Clone the repository:
 
-git clone https://github.com/yourusername/aerosky-weather-dashboard.git
+git clone https://github.com/kvhankalas-star/aerosky-weather-dashboard.git
 
 Open the project folder:
 
